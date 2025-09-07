@@ -1,8 +1,8 @@
 {
-  "name": "claude-config",
+  "name": "claude-config-vscode",
   "displayName": "Claude Config", 
   "description": "Manage Claude API configurations with beautiful UI",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.74.0"
@@ -37,6 +37,24 @@
         "category": "Claude Config"
       }
     ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claude-config",
+          "title": "Claude Config",
+          "icon": "$(gear)"
+        }
+      ]
+    },
+    "views": {
+      "claude-config": [
+        {
+          "id": "claude-config-profiles",
+          "name": "Profiles",
+          "when": "true"
+        }
+      ]
+    },
     "menus": {
       "commandPalette": [
         {
@@ -55,6 +73,32 @@
           "command": "claude-config.refreshStatus",
           "when": "true"
         }
+      ],
+      "view/title": [
+        {
+          "command": "claude-config.addProfile",
+          "when": "view == claude-config-profiles",
+          "group": "navigation",
+          "title": "➕"
+        },
+        {
+          "command": "claude-config.refreshStatus",
+          "when": "view == claude-config-profiles", 
+          "group": "navigation",
+          "title": "🔄"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "claude-config.quickSwitch",
+          "when": "view == claude-config-profiles && viewItem == profile",
+          "group": "inline"
+        },
+        {
+          "command": "claude-config.openManager",
+          "when": "view == claude-config-profiles && viewItem == profile",
+          "group": "inline"
+        }
       ]
     }
   },
@@ -70,7 +114,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/claude-config"
+    "url": "https://github.com/TravisZS/claude-config-Vscode"
   },
   "keywords": [
     "claude",
@@ -81,7 +125,7 @@
     "config",
     "management"
   ],
-  "author": "Your Name",
+  "author": "TravisZS",
   "license": "MIT",
-  "publisher": "your-publisher-name"
+  "publisher": "TravisZS"
 }

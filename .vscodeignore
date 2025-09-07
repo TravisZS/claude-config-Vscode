@@ -1,0 +1,10 @@
+# Ignore unnecessary files when packaging
+node_modules/
+.git/
+.vscode-test/
+*.vsix
+src/
+tsconfig.json
+.gitignore
+.vscodeignore
+PUBLISH_GUIDE.md

@@ -2,10 +2,12 @@ import * as vscode from 'vscode';
 import { ConfigManager } from './utils/configManager';
 import { WebviewProvider } from './webview/webviewProvider';
 import { StatusBarManager } from './utils/statusBarManager';
+import { ProfileTreeDataProvider } from './views/profileTreeView';
 
 let configManager: ConfigManager;
 let webviewProvider: WebviewProvider;
 let statusBarManager: StatusBarManager;
+let treeDataProvider: ProfileTreeDataProvider;
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Claude Configuration Manager is now active!');
@@ -14,6 +16,15 @@ export function activate(context: vscode.ExtensionContext) {
     configManager = new ConfigManager();
     webviewProvider = new WebviewProvider(context, configManager);
     statusBarManager = new StatusBarManager(configManager);
+    treeDataProvider = new ProfileTreeDataProvider(configManager);
+
+    // Register tree view
+    const treeView = vscode.window.createTreeView('claude-config-profiles', {
+        treeDataProvider: treeDataProvider,
+        showCollapseAll: false
+    });
+
+    context.subscriptions.push(treeView);
 
     // Register commands
     const commands = [
@@ -31,7 +42,50 @@ export function activate(context: vscode.ExtensionContext) {
 
         vscode.commands.registerCommand('claude-config.refreshStatus', () => {
             statusBarManager.updateStatusBar();
+            treeDataProvider.refresh();
             vscode.window.showInformationMessage('Claude configuration status refreshed!');
+        }),
+
+        vscode.commands.registerCommand('claude-config.switchProfile', async (profileId: string) => {
+            try {
+                const success = configManager.switchProfile(profileId);
+                if (success) {
+                    const profile = configManager.getProfile(profileId);
+                    statusBarManager.updateStatusBar();
+                    treeDataProvider.refresh();
+                    vscode.window.showInformationMessage(`Switched to profile: ${profile?.name}`);
+                } else {
+                    vscode.window.showErrorMessage('Failed to switch profile');
+                }
+            } catch (error) {
+                vscode.window.showErrorMessage(`Error switching profile: ${error}`);
+            }
+        }),
+
+        vscode.commands.registerCommand('claude-config.deleteProfile', async (profileId: string) => {
+            const profile = configManager.getProfile(profileId);
+            if (!profile) return;
+
+            const confirm = await vscode.window.showWarningMessage(
+                `Are you sure you want to delete profile "${profile.name}"?`,
+                'Delete',
+                'Cancel'
+            );
+
+            if (confirm === 'Delete') {
+                try {
+                    const success = configManager.deleteProfile(profileId);
+                    if (success) {
+                        statusBarManager.updateStatusBar();
+                        treeDataProvider.refresh();
+                        vscode.window.showInformationMessage(`Profile "${profile.name}" deleted successfully!`);
+                    } else {
+                        vscode.window.showErrorMessage('Failed to delete profile.');
+                    }
+                } catch (error) {
+                    vscode.window.showErrorMessage(`Error deleting profile: ${error}`);
+                }
+            }
         })
     ];
 
@@ -123,6 +177,7 @@ async function showQuickSwitchPicker(): Promise<void> {
             const success = configManager.switchProfile(profile.id);
             if (success) {
                 statusBarManager.updateStatusBar();
+                treeDataProvider.refresh();
                 vscode.window.showInformationMessage(`Switched to profile: ${profile.name}`);
             } else {
                 vscode.window.showErrorMessage('Failed to switch profile');
@@ -217,6 +272,7 @@ async function showAddProfileInput(): Promise<void> {
         }
 
         const newProfile = configManager.addProfile(profileData);
+        treeDataProvider.refresh();
         
         // Ask if user wants to switch to the new profile
         const switchNow = await vscode.window.showInformationMessage(
@@ -228,6 +284,7 @@ async function showAddProfileInput(): Promise<void> {
         if (switchNow === 'Switch Now') {
             configManager.switchProfile(newProfile.id);
             statusBarManager.updateStatusBar();
+            treeDataProvider.refresh();
             vscode.window.showInformationMessage(`Switched to profile: ${newProfile.name}`);
         }
     } catch (error) {

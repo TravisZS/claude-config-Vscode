@@ -12,7 +12,7 @@ class WebviewProvider {
             this.panel.reveal();
             return;
         }
-        this.panel = vscode.window.createWebviewPanel(WebviewProvider.viewType, 'Claude Configuration Manager', vscode.ViewColumn.One, {
+        this.panel = vscode.window.createWebviewPanel(WebviewProvider.viewType, 'Claude Config', vscode.ViewColumn.One, {
             enableScripts: true,
             retainContextWhenHidden: true,
             localResourceRoots: [
@@ -42,7 +42,7 @@ class WebviewProvider {
                 <header class="header">
                     <h1>
                         <span class="icon">⚙️</span>
-                        Claude Configuration Manager
+                        Claude Config
                     </h1>
                     <div class="header-actions">
                         <button id="addProfile" class="btn btn-primary">
