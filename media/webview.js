@@ -186,13 +186,10 @@
     };
 
     window.deleteProfile = function(profileId) {
-        const profile = profiles.find(p => p.id === profileId);
-        if (profile && confirm(`Are you sure you want to delete profile "${profile.name}"?`)) {
-            vscode.postMessage({
-                type: 'deleteProfile',
-                profileId: profileId
-            });
-        }
+        vscode.postMessage({
+            type: 'deleteProfile',
+            profileId: profileId
+        });
     };
 
     function openAddModal() {

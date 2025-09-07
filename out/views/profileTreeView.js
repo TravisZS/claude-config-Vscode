@@ -42,7 +42,7 @@ class ProfileTreeDataProvider {
             actions.push(new ProfileTreeItem(`URL: ${profile.baseUrl}`, undefined, vscode.TreeItemCollapsibleState.None, 'info'));
             // 操作按钮
             if (!isActive) {
-                const switchItem = new ProfileTreeItem('$(check) Switch', profile, vscode.TreeItemCollapsibleState.None, 'action-switch');
+                const switchItem = new ProfileTreeItem('Switch', profile, vscode.TreeItemCollapsibleState.None, 'action-switch');
                 switchItem.command = {
                     command: 'claude-config.switchProfile',
                     title: 'Switch Profile',
@@ -50,7 +50,7 @@ class ProfileTreeDataProvider {
                 };
                 actions.push(switchItem);
             }
-            const editItem = new ProfileTreeItem('$(gear) Open', profile, vscode.TreeItemCollapsibleState.None, 'action-edit');
+            const editItem = new ProfileTreeItem('Open', profile, vscode.TreeItemCollapsibleState.None, 'action-edit');
             editItem.command = {
                 command: 'claude-config.openManager',
                 title: 'Edit Profile',
@@ -60,7 +60,7 @@ class ProfileTreeDataProvider {
             // 只有多个配置时才显示删除按钮
             const allProfiles = this.configManager.getAllProfiles();
             if (allProfiles.length > 1) {
-                const deleteItem = new ProfileTreeItem('$(trash) Delete', profile, vscode.TreeItemCollapsibleState.None, 'action-delete');
+                const deleteItem = new ProfileTreeItem('Delete', profile, vscode.TreeItemCollapsibleState.None, 'action-delete');
                 deleteItem.command = {
                     command: 'claude-config.deleteProfile',
                     title: 'Delete Profile',
@@ -93,10 +93,10 @@ class ProfileTreeItem extends vscode.TreeItem {
             this.iconPath = new vscode.ThemeIcon('info');
         }
         else if (contextValue === 'action-switch') {
-            this.iconPath = new vscode.ThemeIcon('arrow-swap');
+            this.iconPath = new vscode.ThemeIcon('check');
         }
         else if (contextValue === 'action-edit') {
-            this.iconPath = new vscode.ThemeIcon('edit');
+            this.iconPath = new vscode.ThemeIcon('gear');
         }
         else if (contextValue === 'action-delete') {
             this.iconPath = new vscode.ThemeIcon('trash');

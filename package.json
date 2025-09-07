@@ -2,7 +2,7 @@
   "name": "claude-config-vscode",
   "displayName": "Claude Config", 
   "description": "Manage Claude API configurations with beautiful UI",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.74.0"

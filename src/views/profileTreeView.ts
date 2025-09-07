@@ -67,7 +67,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             // 操作按钮
             if (!isActive) {
                 const switchItem = new ProfileTreeItem(
-                    '$(check) Switch',
+                    'Switch',
                     profile,
                     vscode.TreeItemCollapsibleState.None,
                     'action-switch'
@@ -81,7 +81,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             }
             
             const editItem = new ProfileTreeItem(
-                '$(gear) Open',
+                'Open',
                 profile,
                 vscode.TreeItemCollapsibleState.None,
                 'action-edit'
@@ -97,7 +97,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             const allProfiles = this.configManager.getAllProfiles();
             if (allProfiles.length > 1) {
                 const deleteItem = new ProfileTreeItem(
-                    '$(trash) Delete',
+                    'Delete',
                     profile,
                     vscode.TreeItemCollapsibleState.None,
                     'action-delete'
@@ -138,9 +138,9 @@ class ProfileTreeItem extends vscode.TreeItem {
         if (contextValue === 'info') {
             this.iconPath = new vscode.ThemeIcon('info');
         } else if (contextValue === 'action-switch') {
-            this.iconPath = new vscode.ThemeIcon('arrow-swap');
+            this.iconPath = new vscode.ThemeIcon('check');
         } else if (contextValue === 'action-edit') {
-            this.iconPath = new vscode.ThemeIcon('edit');
+            this.iconPath = new vscode.ThemeIcon('gear');
         } else if (contextValue === 'action-delete') {
             this.iconPath = new vscode.ThemeIcon('trash');
         }

@@ -7,3 +7,4 @@ src/
 tsconfig.json
 .gitignore
 .vscodeignore
+PUBLISH_GUIDE.md
