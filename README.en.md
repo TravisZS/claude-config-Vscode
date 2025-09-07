@@ -175,16 +175,6 @@ vsce publish
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Create a Pull Request
 
-## 📝 Changelog
-
-### v0.0.1
-- ✨ Initial release
-- 🎨 Modern configuration management interface
-- ⚡ Quick configuration switching functionality
-- 🔐 Secure API key management
-- 📊 Status bar integration
-- 📦 Configuration import/export functionality
-- 🗂️ Sidebar tree view integration
 
 ## 📄 License
 

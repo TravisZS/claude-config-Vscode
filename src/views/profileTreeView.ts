@@ -67,7 +67,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             // 操作按钮
             if (!isActive) {
                 const switchItem = new ProfileTreeItem(
-                    '🔄 Switch to this profile',
+                    '$(check) Switch',
                     profile,
                     vscode.TreeItemCollapsibleState.None,
                     'action-switch'
@@ -81,7 +81,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             }
             
             const editItem = new ProfileTreeItem(
-                '✏️ Edit profile',
+                '$(gear) Open',
                 profile,
                 vscode.TreeItemCollapsibleState.None,
                 'action-edit'
@@ -97,7 +97,7 @@ export class ProfileTreeDataProvider implements vscode.TreeDataProvider<ProfileT
             const allProfiles = this.configManager.getAllProfiles();
             if (allProfiles.length > 1) {
                 const deleteItem = new ProfileTreeItem(
-                    '🗑️ Delete profile',
+                    '$(trash) Delete',
                     profile,
                     vscode.TreeItemCollapsibleState.None,
                     'action-delete'

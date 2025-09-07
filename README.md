@@ -164,15 +164,6 @@ vsce publish
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 创建一个 Pull Request
 
-## 📝 更新日志
-
-### v0.0.1
-- ✨ 首次发布
-- 🎨 现代化配置管理界面
-- ⚡ 快速配置切换功能
-- 🔐 安全的 API 密钥管理
-- 📊 状态栏集成
-- 📦 配置导入导出功能
 
 ## 📄 许可证
 

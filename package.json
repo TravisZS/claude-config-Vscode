@@ -18,23 +18,27 @@
     "commands": [
       {
         "command": "claude-config.openManager",
-        "title": "Open Configuration Manager",
-        "category": "Claude Config"
+        "title": "Open",
+        "category": "Claude Config",
+        "icon": "$(gear)"
       },
       {
         "command": "claude-config.quickSwitch",
-        "title": "Quick Switch Profile",
-        "category": "Claude Config"
+        "title": "Switch",
+        "category": "Claude Config",
+        "icon": "$(check)"
       },
       {
         "command": "claude-config.addProfile",
         "title": "Add New Profile",
-        "category": "Claude Config"
+        "category": "Claude Config",
+        "icon": "$(add)"
       },
       {
         "command": "claude-config.refreshStatus",
         "title": "Refresh Status",
-        "category": "Claude Config"
+        "category": "Claude Config",
+        "icon": "$(refresh)"
       }
     ],
     "viewsContainers": {
@@ -78,14 +82,12 @@
         {
           "command": "claude-config.addProfile",
           "when": "view == claude-config-profiles",
-          "group": "navigation",
-          "title": "➕"
+          "group": "navigation"
         },
         {
           "command": "claude-config.refreshStatus",
           "when": "view == claude-config-profiles", 
-          "group": "navigation",
-          "title": "🔄"
+          "group": "navigation"
         }
       ],
       "view/item/context": [
